@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E7F6577C2CA7BE1F001513DB /* SocialSparkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */; };
+		E7F6577E2CA7BE1F001513DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F6577D2CA7BE1F001513DB /* ContentView.swift */; };
+		E7F657802CA7BE20001513DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F6577F2CA7BE20001513DB /* Assets.xcassets */; };
+		E7F657832CA7BE21001513DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F657822CA7BE21001513DB /* Preview Assets.xcassets */; };
+		E7F6578D2CA7BE21001513DB /* SocialSparkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F6578C2CA7BE21001513DB /* SocialSparkTests.swift */; };
+		E7F657972CA7BE21001513DB /* SocialSparkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657962CA7BE21001513DB /* SocialSparkUITests.swift */; };
+		E7F657992CA7BE21001513DB /* SocialSparkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657982CA7BE21001513DB /* SocialSparkUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E7F657892CA7BE21001513DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7F657702CA7BE1F001513DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7F657772CA7BE1F001513DB;
+			remoteInfo = SocialSpark;
+		};
+		E7F657932CA7BE21001513DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7F657702CA7BE1F001513DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7F657772CA7BE1F001513DB;
+			remoteInfo = SocialSpark;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E7F657782CA7BE1F001513DB /* SocialSpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialSpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSparkApp.swift; sourceTree = "<group>"; };
+		E7F6577D2CA7BE1F001513DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E7F6577F2CA7BE20001513DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7F657822CA7BE21001513DB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E7F657882CA7BE21001513DB /* SocialSparkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialSparkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F6578C2CA7BE21001513DB /* SocialSparkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSparkTests.swift; sourceTree = "<group>"; };
+		E7F657922CA7BE21001513DB /* SocialSparkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialSparkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F657962CA7BE21001513DB /* SocialSparkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSparkUITests.swift; sourceTree = "<group>"; };
+		E7F657982CA7BE21001513DB /* SocialSparkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSparkUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E7F657752CA7BE1F001513DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7F657852CA7BE21001513DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7F6578F2CA7BE21001513DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E7F6576F2CA7BE1F001513DB = {
+			isa = PBXGroup;
+			children = (
+				E7F6577A2CA7BE1F001513DB /* SocialSpark */,
+				E7F6578B2CA7BE21001513DB /* SocialSparkTests */,
+				E7F657952CA7BE21001513DB /* SocialSparkUITests */,
+				E7F657792CA7BE1F001513DB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E7F657792CA7BE1F001513DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7F657782CA7BE1F001513DB /* SocialSpark.app */,
+				E7F657882CA7BE21001513DB /* SocialSparkTests.xctest */,
+				E7F657922CA7BE21001513DB /* SocialSparkUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7F6577A2CA7BE1F001513DB /* SocialSpark */ = {
+			isa = PBXGroup;
+			children = (
+				E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */,
+				E7F6577D2CA7BE1F001513DB /* ContentView.swift */,
+				E7F6577F2CA7BE20001513DB /* Assets.xcassets */,
+				E7F657812CA7BE21001513DB /* Preview Content */,
+			);
+			path = SocialSpark;
+			sourceTree = "<group>";
+		};
+		E7F657812CA7BE21001513DB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E7F657822CA7BE21001513DB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E7F6578B2CA7BE21001513DB /* SocialSparkTests */ = {
+			isa = PBXGroup;
+			children = (
+				E7F6578C2CA7BE21001513DB /* SocialSparkTests.swift */,
+			);
+			path = SocialSparkTests;
+			sourceTree = "<group>";
+		};
+		E7F657952CA7BE21001513DB /* SocialSparkUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E7F657962CA7BE21001513DB /* SocialSparkUITests.swift */,
+				E7F657982CA7BE21001513DB /* SocialSparkUITestsLaunchTests.swift */,
+			);
+			path = SocialSparkUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E7F657772CA7BE1F001513DB /* SocialSpark */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7F6579C2CA7BE21001513DB /* Build configuration list for PBXNativeTarget "SocialSpark" */;
+			buildPhases = (
+				E7F657742CA7BE1F001513DB /* Sources */,
+				E7F657752CA7BE1F001513DB /* Frameworks */,
+				E7F657762CA7BE1F001513DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SocialSpark;
+			productName = SocialSpark;
+			productReference = E7F657782CA7BE1F001513DB /* SocialSpark.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E7F657872CA7BE21001513DB /* SocialSparkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7F6579F2CA7BE21001513DB /* Build configuration list for PBXNativeTarget "SocialSparkTests" */;
+			buildPhases = (
+				E7F657842CA7BE21001513DB /* Sources */,
+				E7F657852CA7BE21001513DB /* Frameworks */,
+				E7F657862CA7BE21001513DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7F6578A2CA7BE21001513DB /* PBXTargetDependency */,
+			);
+			name = SocialSparkTests;
+			productName = SocialSparkTests;
+			productReference = E7F657882CA7BE21001513DB /* SocialSparkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E7F657912CA7BE21001513DB /* SocialSparkUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7F657A22CA7BE21001513DB /* Build configuration list for PBXNativeTarget "SocialSparkUITests" */;
+			buildPhases = (
+				E7F6578E2CA7BE21001513DB /* Sources */,
+				E7F6578F2CA7BE21001513DB /* Frameworks */,
+				E7F657902CA7BE21001513DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7F657942CA7BE21001513DB /* PBXTargetDependency */,
+			);
+			name = SocialSparkUITests;
+			productName = SocialSparkUITests;
+			productReference = E7F657922CA7BE21001513DB /* SocialSparkUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E7F657702CA7BE1F001513DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					E7F657772CA7BE1F001513DB = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					E7F657872CA7BE21001513DB = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = E7F657772CA7BE1F001513DB;
+					};
+					E7F657912CA7BE21001513DB = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = E7F657772CA7BE1F001513DB;
+					};
+				};
+			};
+			buildConfigurationList = E7F657732CA7BE1F001513DB /* Build configuration list for PBXProject "SocialSpark" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E7F6576F2CA7BE1F001513DB;
+			productRefGroup = E7F657792CA7BE1F001513DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E7F657772CA7BE1F001513DB /* SocialSpark */,
+				E7F657872CA7BE21001513DB /* SocialSparkTests */,
+				E7F657912CA7BE21001513DB /* SocialSparkUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7F657762CA7BE1F001513DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7F657832CA7BE21001513DB /* Preview Assets.xcassets in Resources */,
+				E7F657802CA7BE20001513DB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7F657862CA7BE21001513DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7F657902CA7BE21001513DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E7F657742CA7BE1F001513DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7F6577E2CA7BE1F001513DB /* ContentView.swift in Sources */,
+				E7F6577C2CA7BE1F001513DB /* SocialSparkApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7F657842CA7BE21001513DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7F6578D2CA7BE21001513DB /* SocialSparkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7F6578E2CA7BE21001513DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7F657972CA7BE21001513DB /* SocialSparkUITests.swift in Sources */,
+				E7F657992CA7BE21001513DB /* SocialSparkUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E7F6578A2CA7BE21001513DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7F657772CA7BE1F001513DB /* SocialSpark */;
+			targetProxy = E7F657892CA7BE21001513DB /* PBXContainerItemProxy */;
+		};
+		E7F657942CA7BE21001513DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7F657772CA7BE1F001513DB /* SocialSpark */;
+			targetProxy = E7F657932CA7BE21001513DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E7F6579A2CA7BE21001513DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E7F6579B2CA7BE21001513DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E7F6579D2CA7BE21001513DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SocialSpark/Preview Content\"";
+				DEVELOPMENT_TEAM = C3H72H379Z;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DavidSerrao.SocialSpark;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E7F6579E2CA7BE21001513DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SocialSpark/Preview Content\"";
+				DEVELOPMENT_TEAM = C3H72H379Z;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DavidSerrao.SocialSpark;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E7F657A02CA7BE21001513DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C3H72H379Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DavidSerrao.SocialSparkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SocialSpark.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SocialSpark";
+			};
+			name = Debug;
+		};
+		E7F657A12CA7BE21001513DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C3H72H379Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DavidSerrao.SocialSparkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SocialSpark.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SocialSpark";
+			};
+			name = Release;
+		};
+		E7F657A32CA7BE21001513DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C3H72H379Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DavidSerrao.SocialSparkUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SocialSpark;
+			};
+			name = Debug;
+		};
+		E7F657A42CA7BE21001513DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C3H72H379Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DavidSerrao.SocialSparkUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SocialSpark;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E7F657732CA7BE1F001513DB /* Build configuration list for PBXProject "SocialSpark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7F6579A2CA7BE21001513DB /* Debug */,
+				E7F6579B2CA7BE21001513DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7F6579C2CA7BE21001513DB /* Build configuration list for PBXNativeTarget "SocialSpark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7F6579D2CA7BE21001513DB /* Debug */,
+				E7F6579E2CA7BE21001513DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7F6579F2CA7BE21001513DB /* Build configuration list for PBXNativeTarget "SocialSparkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7F657A02CA7BE21001513DB /* Debug */,
+				E7F657A12CA7BE21001513DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7F657A22CA7BE21001513DB /* Build configuration list for PBXNativeTarget "SocialSparkUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7F657A32CA7BE21001513DB /* Debug */,
+				E7F657A42CA7BE21001513DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E7F657702CA7BE1F001513DB /* Project object */;
+}
