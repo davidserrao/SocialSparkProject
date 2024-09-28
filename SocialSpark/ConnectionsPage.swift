@@ -17,73 +17,15 @@ struct Contact: Codable, Identifiable {
     var desiredRelationship: String
     var lastContacted: Date
     var previousContacts: [Date]
+    var description: String
 }
 
-//struct ConnectionsPage: View {
-//    // List of contacts with additional properties
-//    @State private var contacts: [Contact] = [
-//        Contact(
-//            name: "John Doe",
-//            phoneNumber: "555-1234",
-//            email: "john@example.com",
-//            currentRelationship: "Friends",
-//            desiredRelationship: "Close Friends",
-//            lastContacted: Date(),
-//            previousContacts: [Date(), Date().addingTimeInterval(-86400)] // Two previous contact dates
-//        ),
-//        Contact(
-//            name: "Jane Smith",
-//            phoneNumber: "555-5678",
-//            email: "jane@example.com",
-//            currentRelationship: "Acquaintances",
-//            desiredRelationship: "Friends",
-//            lastContacted: Date().addingTimeInterval(-172800), // Two days ago
-//            previousContacts: [Date().addingTimeInterval(-604800)] // One week ago
-//        ),
-//        Contact(
-//            name: "Michael Johnson",
-//            phoneNumber: "555-9876",
-//            email: "michael@example.com",
-//            currentRelationship: "Stranger",
-//            desiredRelationship: "Friends",
-//            lastContacted: Date().addingTimeInterval(-259200), // Three days ago
-//            previousContacts: []
-//        )
-//    ]
-//    
-//    @State private var selectedContact: Contact? = nil
-//    @State private var isShowingContactInfo = false
-//
-//    var body: some View {
-//        NavigationView {
-//            List(contacts) { contact in
-//                Button(action: {
-//                    selectedContact = contact
-//                    isShowingContactInfo = true
-//                }) {
-//                    HStack {
-//                        Text(contact.name)
-//                            .font(.headline)
-//                            .foregroundColor(.primary)
-//                        Spacer()
-//                        Image(systemName: "chevron.right")
-//                            .foregroundColor(.gray)
-//                    }
-//                }
-//            }
-//            .navigationTitle("Connections")
-//            .sheet(item: $selectedContact) { contact in
-//                // Pass the selected contact to the sheet
-//                ContactInfoView(contact: contact)
-//            }
-//        }
-//    }
-//}
 
 struct ConnectionsPage: View {
     @StateObject private var viewModel = ConnectionsViewModel()
     @State private var selectedContact: Contact? = nil
     @State private var isShowingContactInfo = false
+    @State private var isShowingAddContact = false // New state for showing the add/edit popup
 
     var body: some View {
         NavigationView {
@@ -103,9 +45,18 @@ struct ConnectionsPage: View {
                 }
             }
             .navigationTitle("Connections")
+            .navigationBarItems(trailing: Button(action: {
+                isShowingAddContact = true
+            }) {
+                Image(systemName: "plus")
+                    .font(.title2)
+            })
             .sheet(item: $selectedContact) { contact in
                 // Pass the selected contact to the sheet
                 ContactInfoView(contact: contact)
+            }
+            .sheet(isPresented: $isShowingAddContact) {
+                AddEditContactView(viewModel: viewModel, isShowing: $isShowingAddContact)
             }
             .onAppear {
                 // Fetch contacts when the view appears
@@ -115,7 +66,81 @@ struct ConnectionsPage: View {
     }
 }
 
-// View for displaying contact information in a modal
+// View for adding or editing a contact
+struct AddEditContactView: View {
+    @ObservedObject var viewModel: ConnectionsViewModel
+    @Binding var isShowing: Bool
+    @State private var name: String = ""
+    @State private var phoneNumber: String = ""
+    @State private var email: String = ""
+    @State private var currentRelationship: String = "Undefined"
+    @State private var desiredRelationship: String = "Undefined"
+    @State private var description: String = ""
+    
+    let relationshipOptions = ["Undefined", "Stranger", "Acquaintances", "Friends", "Close Friends", "Best Friends"]
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("Contact Information")) {
+                    TextField("Name", text: $name)
+                    TextField("Phone Number", text: $phoneNumber)
+                    TextField("Email", text: $email)
+                }
+                
+                Section(header: Text("Relationships")) {
+                    Picker("Current Relationship", selection: $currentRelationship) {
+                        ForEach(relationshipOptions, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    Picker("Desired Relationship", selection: $desiredRelationship) {
+                        ForEach(relationshipOptions, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                }
+                
+                // Add description input
+                Section(header: Text("Description")) {
+                    TextEditor(text: $description)
+                        .frame(height: 100)
+                        .cornerRadius(8)
+                        .overlay(RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray.opacity(0.5), lineWidth: 1))
+                }
+                
+                Section {
+                    Button("Save Contact") {
+                        saveContact()
+                    }
+                    .foregroundColor(.blue)
+                }
+            }
+            .navigationTitle("Add/Edit Contact")
+            .navigationBarItems(leading: Button("Cancel") {
+                isShowing = false
+            })
+        }
+    }
+    
+    private func saveContact() {
+        let newContact = Contact(
+            name: name,
+            phoneNumber: phoneNumber,
+            email: email,
+            currentRelationship: currentRelationship,
+            desiredRelationship: desiredRelationship,
+            lastContacted: Date(),
+            previousContacts: [],
+            description: description
+        )
+        viewModel.addContact(newContact)
+        isShowing = false
+    }
+}
+
+// View for showing contact info
 struct ContactInfoView: View {
     var contact: Contact
     @State private var currentRelationshipIndex: Int = 0
@@ -173,12 +198,20 @@ struct ContactInfoView: View {
                 Text(formattedDate(date))
                     .padding(.leading)
             }
+            
+            // Add description display
+            Text("Description:")
+                .font(.headline)
+                .padding(.top)
+            
+            Text(contact.description)
+                .padding(.leading)
 
             Spacer()
 
             // Close Button
             Button(action: {
-                
+                // action for closing
             }) {
                 Text("Edit")
                     .font(.title2)
