@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import Auth0
 
 struct StatsPage: View {
     var body: some View {
-        Text("Stats")
+        NavigationView{
+            VStack() {
+                Text("Stats")
+                    .navigationTitle("Stats")
+            }
+        }
     }
 }
 

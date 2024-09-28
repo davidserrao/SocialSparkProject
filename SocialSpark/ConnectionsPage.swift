@@ -72,10 +72,9 @@ struct ConnectionsPage: View {
                 }
             }
             .navigationTitle("Connections")
-            .sheet(isPresented: $isShowingContactInfo) {
-                if let contact = selectedContact {
-                    ContactInfoView(contact: contact)
-                }
+            .sheet(item: $selectedContact) { contact in
+                // Pass the selected contact to the sheet
+                ContactInfoView(contact: contact)
             }
         }
     }
@@ -84,30 +83,27 @@ struct ConnectionsPage: View {
 // View for displaying contact information in a modal
 struct ContactInfoView: View {
     var contact: Contact
-    @State private var currentRelationshipIndex: Int
-    @State private var desiredRelationshipIndex: Int
+    @State private var currentRelationshipIndex: Int = 0
+    @State private var desiredRelationshipIndex: Int = 0
 
     // Options for relationships
     let relationshipOptions = ["Stranger", "Acquaintances", "Friends", "Close Friends", "Best Friends"]
 
-    init(contact: Contact) {
-        self.contact = contact
-        self._currentRelationshipIndex = State(initialValue: relationshipOptions.firstIndex(of: contact.currentRelationship) ?? 0)
-        self._desiredRelationshipIndex = State(initialValue: relationshipOptions.firstIndex(of: contact.desiredRelationship) ?? 0)
-    }
-
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("Contact Information")
+            Text("\(contact.name)")
                 .font(.largeTitle)
-
-            // Connection name
-            Text("Name: \(contact.name)")
-                .font(.title3)
+            
+            // Phone #
+            Text("Phone Number: \(contact.phoneNumber)")
+            
+            // Phone #
+            Text("Email: \(contact.email)")
             
             // Current Relationship Dropdown
             HStack() {
                 Text("Current Relationship:")
+                Spacer()
                 Picker("Current Relationship", selection: $currentRelationshipIndex) {
                     ForEach(0..<relationshipOptions.count, id: \.self) { index in
                         Text(relationshipOptions[index]).tag(index)
@@ -116,9 +112,11 @@ struct ContactInfoView: View {
                 .pickerStyle(MenuPickerStyle())
             }
 
+
             // Desired Relationship Dropdown
             HStack() {
                 Text("Desired Relationship:")
+                Spacer()
                 Picker("Desired Relationship", selection: $desiredRelationshipIndex) {
                     ForEach(0..<relationshipOptions.count, id: \.self) { index in
                         Text(relationshipOptions[index]).tag(index)
@@ -127,11 +125,9 @@ struct ContactInfoView: View {
                 .pickerStyle(MenuPickerStyle())
             }
 
-
             // Last Contacted Date
             Text("Last Contacted: \(formattedDate(contact.lastContacted))")
-                .font(.headline)
-                
+                .font(.title3)
 
             // List of Previous Contacts
             Text("Previous Contacts:")
@@ -145,9 +141,23 @@ struct ContactInfoView: View {
 
             Spacer()
 
-            
+            // Close Button
+            Button(action: {
+                
+            }) {
+                Text("Close")
+                    .font(.title2)
+                    .foregroundColor(.blue)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .center)
         }
         .padding()
+        .onAppear {
+            // Initialize the picker indexes when the view appears
+            currentRelationshipIndex = relationshipOptions.firstIndex(of: contact.currentRelationship) ?? 0
+            desiredRelationshipIndex = relationshipOptions.firstIndex(of: contact.desiredRelationship) ?? 0
+        }
     }
 
     // Helper function to format date

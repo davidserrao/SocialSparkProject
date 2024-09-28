@@ -17,6 +17,8 @@
 		E7F657A62CA7CE66001513DB /* SparksPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657A52CA7CE66001513DB /* SparksPage.swift */; };
 		E7F657A82CA7CEA1001513DB /* ConnectionsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657A72CA7CEA1001513DB /* ConnectionsPage.swift */; };
 		E7F657AC2CA7CEF9001513DB /* StatsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657AB2CA7CEF9001513DB /* StatsPage.swift */; };
+		E7F657B12CA7ECAC001513DB /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = E7F657B02CA7ECAC001513DB /* Auth0 */; };
+		E7F657B32CA7ED13001513DB /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7F657B22CA7ED13001513DB /* Auth0.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,7 @@
 		E7F657A52CA7CE66001513DB /* SparksPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparksPage.swift; sourceTree = "<group>"; };
 		E7F657A72CA7CEA1001513DB /* ConnectionsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsPage.swift; sourceTree = "<group>"; };
 		E7F657AB2CA7CEF9001513DB /* StatsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPage.swift; sourceTree = "<group>"; };
+		E7F657B22CA7ED13001513DB /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F657B12CA7ECAC001513DB /* Auth0 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +111,7 @@
 				E7F657AB2CA7CEF9001513DB /* StatsPage.swift */,
 				E7F6577F2CA7BE20001513DB /* Assets.xcassets */,
 				E7F657812CA7BE21001513DB /* Preview Content */,
+				E7F657B22CA7ED13001513DB /* Auth0.plist */,
 			);
 			path = SocialSpark;
 			sourceTree = "<group>";
@@ -152,6 +157,9 @@
 			dependencies = (
 			);
 			name = SocialSpark;
+			packageProductDependencies = (
+				E7F657B02CA7ECAC001513DB /* Auth0 */,
+			);
 			productName = SocialSpark;
 			productReference = E7F657782CA7BE1F001513DB /* SocialSpark.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +232,9 @@
 				Base,
 			);
 			mainGroup = E7F6576F2CA7BE1F001513DB;
+			packageReferences = (
+				E7F657AF2CA7ECAB001513DB /* XCRemoteSwiftPackageReference "Auth0" */,
+			);
 			productRefGroup = E7F657792CA7BE1F001513DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -241,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7F657832CA7BE21001513DB /* Preview Assets.xcassets in Resources */,
+				E7F657B32CA7ED13001513DB /* Auth0.plist in Resources */,
 				E7F657802CA7BE20001513DB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,6 +612,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E7F657AF2CA7ECAB001513DB /* XCRemoteSwiftPackageReference "Auth0" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/Auth0.swift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E7F657B02CA7ECAC001513DB /* Auth0 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7F657AF2CA7ECAB001513DB /* XCRemoteSwiftPackageReference "Auth0" */;
+			productName = Auth0;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E7F657702CA7BE1F001513DB /* Project object */;
 }
