@@ -14,6 +14,9 @@
 		E7F6578D2CA7BE21001513DB /* SocialSparkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F6578C2CA7BE21001513DB /* SocialSparkTests.swift */; };
 		E7F657972CA7BE21001513DB /* SocialSparkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657962CA7BE21001513DB /* SocialSparkUITests.swift */; };
 		E7F657992CA7BE21001513DB /* SocialSparkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657982CA7BE21001513DB /* SocialSparkUITestsLaunchTests.swift */; };
+		E7F657A62CA7CE66001513DB /* SparksPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657A52CA7CE66001513DB /* SparksPage.swift */; };
+		E7F657A82CA7CEA1001513DB /* ConnectionsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657A72CA7CEA1001513DB /* ConnectionsPage.swift */; };
+		E7F657AC2CA7CEF9001513DB /* StatsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657AB2CA7CEF9001513DB /* StatsPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		E7F657922CA7BE21001513DB /* SocialSparkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialSparkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F657962CA7BE21001513DB /* SocialSparkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSparkUITests.swift; sourceTree = "<group>"; };
 		E7F657982CA7BE21001513DB /* SocialSparkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSparkUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E7F657A52CA7CE66001513DB /* SparksPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparksPage.swift; sourceTree = "<group>"; };
+		E7F657A72CA7CEA1001513DB /* ConnectionsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsPage.swift; sourceTree = "<group>"; };
+		E7F657AB2CA7CEF9001513DB /* StatsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,9 @@
 			children = (
 				E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */,
 				E7F6577D2CA7BE1F001513DB /* ContentView.swift */,
+				E7F657A52CA7CE66001513DB /* SparksPage.swift */,
+				E7F657A72CA7CEA1001513DB /* ConnectionsPage.swift */,
+				E7F657AB2CA7CEF9001513DB /* StatsPage.swift */,
 				E7F6577F2CA7BE20001513DB /* Assets.xcassets */,
 				E7F657812CA7BE21001513DB /* Preview Content */,
 			);
@@ -257,8 +266,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F657A82CA7CEA1001513DB /* ConnectionsPage.swift in Sources */,
+				E7F657AC2CA7CEF9001513DB /* StatsPage.swift in Sources */,
 				E7F6577E2CA7BE1F001513DB /* ContentView.swift in Sources */,
 				E7F6577C2CA7BE1F001513DB /* SocialSparkApp.swift in Sources */,
+				E7F657A62CA7CE66001513DB /* SparksPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
