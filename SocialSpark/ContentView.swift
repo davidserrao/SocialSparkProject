@@ -6,17 +6,15 @@
 //
 
 import SwiftUI
-import Auth0
-import Foundation
 
 struct ContentView: View {
-    
-    @State var isAuthenticated = false
-    @State let apiURL = ""
-    
+    @State private var isAuthenticated = true
+    @State private var accessToken: String? = nil
+    private let authManager = AuthManager()
+
     var body: some View {
         if isAuthenticated {
-            TabView{
+            TabView {
                 SparksPage()
                     .tabItem {
                         Image(systemName: "house")
@@ -30,72 +28,27 @@ struct ContentView: View {
                 StatsPage()
                     .tabItem {
                         Image(systemName: "circle")
-                        Text("Sparks")
+                        Text("Stats")
                     }
             }
         } else {
-            VStack() {
+            VStack {
                 Text("Welcome to SocialSpark!")
                 Button("Login") {
                     login()
                 }
                 .buttonStyle(.borderedProminent)
-                Button("public") {
-                    pub()
-                }
-                Button("private") {
-                    priv()
-                }
             }
         }
-        
     }
-}
 
-extension ContentView {
     private func login() {
-        Auth0
-            .webAuth()
-            .start { result in
-                
-                switch result {
-                    
-                case .failure(let error):
-                    print("Failure: \(error)")
-                    
-                case .success(let credentials):
-                    self.isAuthenticated = true
-                    print("Credentials: \(credentials)")
-                    print("ID Token: \(credentials.idToken)")
-                }
-                
+        authManager.login { success, token in
+            if success, let token = token {
+                self.isAuthenticated = true
+                self.accessToken = token
             }
-    }
-    
-    private func logout() {
-        Auth0
-            .webAuth()
-            .clearSession { result in
-                
-                switch result {
-                    
-                case .failure(let error):
-                    print("Failure: \(error)")
-                    
-                case .success(let credentials):
-                    self.isAuthenticated = false
-                    
-                }
-                
-            }
-    }
-    
-    private func pub() {
-        
-    }
-    
-    private func priv() {
-        
+        }
     }
 }
 

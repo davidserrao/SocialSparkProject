@@ -8,8 +8,8 @@
 import SwiftUI
 
 // Model for the contact
-struct Contact: Identifiable {
-    let id = UUID()
+struct Contact: Codable, Identifiable {
+    var id = UUID()
     var name: String
     var phoneNumber: String
     var email: String
@@ -19,44 +19,75 @@ struct Contact: Identifiable {
     var previousContacts: [Date]
 }
 
+//struct ConnectionsPage: View {
+//    // List of contacts with additional properties
+//    @State private var contacts: [Contact] = [
+//        Contact(
+//            name: "John Doe",
+//            phoneNumber: "555-1234",
+//            email: "john@example.com",
+//            currentRelationship: "Friends",
+//            desiredRelationship: "Close Friends",
+//            lastContacted: Date(),
+//            previousContacts: [Date(), Date().addingTimeInterval(-86400)] // Two previous contact dates
+//        ),
+//        Contact(
+//            name: "Jane Smith",
+//            phoneNumber: "555-5678",
+//            email: "jane@example.com",
+//            currentRelationship: "Acquaintances",
+//            desiredRelationship: "Friends",
+//            lastContacted: Date().addingTimeInterval(-172800), // Two days ago
+//            previousContacts: [Date().addingTimeInterval(-604800)] // One week ago
+//        ),
+//        Contact(
+//            name: "Michael Johnson",
+//            phoneNumber: "555-9876",
+//            email: "michael@example.com",
+//            currentRelationship: "Stranger",
+//            desiredRelationship: "Friends",
+//            lastContacted: Date().addingTimeInterval(-259200), // Three days ago
+//            previousContacts: []
+//        )
+//    ]
+//    
+//    @State private var selectedContact: Contact? = nil
+//    @State private var isShowingContactInfo = false
+//
+//    var body: some View {
+//        NavigationView {
+//            List(contacts) { contact in
+//                Button(action: {
+//                    selectedContact = contact
+//                    isShowingContactInfo = true
+//                }) {
+//                    HStack {
+//                        Text(contact.name)
+//                            .font(.headline)
+//                            .foregroundColor(.primary)
+//                        Spacer()
+//                        Image(systemName: "chevron.right")
+//                            .foregroundColor(.gray)
+//                    }
+//                }
+//            }
+//            .navigationTitle("Connections")
+//            .sheet(item: $selectedContact) { contact in
+//                // Pass the selected contact to the sheet
+//                ContactInfoView(contact: contact)
+//            }
+//        }
+//    }
+//}
+
 struct ConnectionsPage: View {
-    // List of contacts with additional properties
-    @State private var contacts: [Contact] = [
-        Contact(
-            name: "John Doe",
-            phoneNumber: "555-1234",
-            email: "john@example.com",
-            currentRelationship: "Friends",
-            desiredRelationship: "Close Friends",
-            lastContacted: Date(),
-            previousContacts: [Date(), Date().addingTimeInterval(-86400)] // Two previous contact dates
-        ),
-        Contact(
-            name: "Jane Smith",
-            phoneNumber: "555-5678",
-            email: "jane@example.com",
-            currentRelationship: "Acquaintances",
-            desiredRelationship: "Friends",
-            lastContacted: Date().addingTimeInterval(-172800), // Two days ago
-            previousContacts: [Date().addingTimeInterval(-604800)] // One week ago
-        ),
-        Contact(
-            name: "Michael Johnson",
-            phoneNumber: "555-9876",
-            email: "michael@example.com",
-            currentRelationship: "Stranger",
-            desiredRelationship: "Friends",
-            lastContacted: Date().addingTimeInterval(-259200), // Three days ago
-            previousContacts: []
-        )
-    ]
-    
+    @StateObject private var viewModel = ConnectionsViewModel()
     @State private var selectedContact: Contact? = nil
     @State private var isShowingContactInfo = false
 
     var body: some View {
         NavigationView {
-            List(contacts) { contact in
+            List(viewModel.contacts) { contact in
                 Button(action: {
                     selectedContact = contact
                     isShowingContactInfo = true
@@ -76,6 +107,10 @@ struct ConnectionsPage: View {
                 // Pass the selected contact to the sheet
                 ContactInfoView(contact: contact)
             }
+            .onAppear {
+                // Fetch contacts when the view appears
+                viewModel.fetchContacts()
+            }
         }
     }
 }
@@ -87,7 +122,7 @@ struct ContactInfoView: View {
     @State private var desiredRelationshipIndex: Int = 0
 
     // Options for relationships
-    let relationshipOptions = ["Stranger", "Acquaintances", "Friends", "Close Friends", "Best Friends"]
+    let relationshipOptions = ["Undefined","Stranger", "Acquaintances", "Friends", "Close Friends", "Best Friends"]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -145,7 +180,7 @@ struct ContactInfoView: View {
             Button(action: {
                 
             }) {
-                Text("Close")
+                Text("Edit")
                     .font(.title2)
                     .foregroundColor(.blue)
             }
