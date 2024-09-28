@@ -13,15 +13,15 @@ class ConnectionsViewModel: ObservableObject {
     @Published var contacts: [Contact] = []
 
     // Function to fetch contacts from an API
-    func fetchContacts() {
-        guard let url = URL(string: "https://yourapi.com/contacts") else {
+    func fetchContacts() async {
+        guard let url = URL(string: "http://127.0.0.1:8000/api/get/contacts/1") else {
             print("Invalid URL")
             return
         }
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
+//        request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -32,6 +32,7 @@ class ConnectionsViewModel: ObservableObject {
             if let data = data {
                 do {
                     let decodedContacts = try JSONDecoder().decode([Contact].self, from: data)
+                    print(decodedContacts.map { $0.id })
                     DispatchQueue.main.async {
                         self.contacts = decodedContacts
                     }
@@ -45,14 +46,14 @@ class ConnectionsViewModel: ObservableObject {
 
     // Function to add a contact using an API (POST)
     func addContact(_ contact: Contact) {
-        guard let url = URL(string: "https://yourapi.com/contacts") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/api/create/contact/1") else {
             print("Invalid URL")
             return
         }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
+//        request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         do {
@@ -87,7 +88,7 @@ class ConnectionsViewModel: ObservableObject {
     func updateContact(_ contact: Contact) {
         let contactId = contact.id
 
-        guard let url = URL(string: "https://yourapi.com/contacts/\(contactId.uuidString)") else {
+        guard let url = URL(string: "https://yourapi.com/contacts/\(contactId)") else {
             print("Invalid URL")
             return
         }

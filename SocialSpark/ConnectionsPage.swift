@@ -9,15 +9,27 @@ import SwiftUI
 
 // Model for the contact
 struct Contact: Codable, Identifiable {
-    var id = UUID()
-    var name: String
-    var phoneNumber: String
-    var email: String
-    var currentRelationship: String
-    var desiredRelationship: String
-    var lastContacted: Date
-    var previousContacts: [Date]
-    var description: String
+    var id: Int?
+    var fname: String
+    var lname: String
+    var pnumber: Int
+    var email: String?
+    var curCloseness: Int
+    var desiredCloseness: Int
+    var minIFCount: Int
+    var minIFTime: Int
+    
+    enum CodingKeys: String, CodingKey {
+            case id = "contactid"          // Maps JSON "userid" to Swift "id"
+            case fname
+            case lname
+            case pnumber
+            case email
+            case curCloseness
+            case desiredCloseness
+            case minIFCount
+            case minIFTime
+        }
 }
 
 
@@ -35,7 +47,7 @@ struct ConnectionsPage: View {
                     isShowingContactInfo = true
                 }) {
                     HStack {
-                        Text(contact.name)
+                        Text(contact.fname)
                             .font(.headline)
                             .foregroundColor(.primary)
                         Spacer()
@@ -58,9 +70,8 @@ struct ConnectionsPage: View {
             .sheet(isPresented: $isShowingAddContact) {
                 AddEditContactView(viewModel: viewModel, isShowing: $isShowingAddContact)
             }
-            .onAppear {
-                // Fetch contacts when the view appears
-                viewModel.fetchContacts()
+            .task {
+                await viewModel.fetchContacts()
             }
         }
     }
@@ -84,7 +95,7 @@ struct AddEditContactView: View {
             Form {
                 Section(header: Text("Contact Information")) {
                     TextField("Name", text: $name)
-                    TextField("Phone Number", text: $phoneNumber)
+                    TextField("Phone Number", text: $phoneNumber).keyboardType(.numberPad)
                     TextField("Email", text: $email)
                 }
                 
@@ -126,14 +137,14 @@ struct AddEditContactView: View {
     
     private func saveContact() {
         let newContact = Contact(
-            name: name,
-            phoneNumber: phoneNumber,
+            fname: name,
+            lname: name,
+            pnumber: Int(phoneNumber) ?? 0,
             email: email,
-            currentRelationship: currentRelationship,
-            desiredRelationship: desiredRelationship,
-            lastContacted: Date(),
-            previousContacts: [],
-            description: description
+            curCloseness: Int(currentRelationship) ?? -1,
+            desiredCloseness: Int(desiredRelationship) ?? -1,
+            minIFCount: -1,
+            minIFTime: -1
         )
         viewModel.addContact(newContact)
         isShowing = false
@@ -151,11 +162,11 @@ struct ContactInfoView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("\(contact.name)")
+            Text("\(contact.fname)")
                 .font(.largeTitle)
             
             // Phone #
-            Text("Phone Number: \(contact.phoneNumber)")
+            Text("Phone Number: \(contact.pnumber)")
             
             // Phone #
             Text("Email: \(contact.email)")
@@ -186,7 +197,7 @@ struct ContactInfoView: View {
             }
 
             // Last Contacted Date
-            Text("Last Contacted: \(formattedDate(contact.lastContacted))")
+            Text("Last Contacted: \(formattedDate(Date()))")
                 .font(.title3)
 
             // List of Previous Contacts
@@ -194,17 +205,17 @@ struct ContactInfoView: View {
                 .font(.headline)
                 .padding(.top)
 
-            ForEach(contact.previousContacts, id: \.self) { date in
-                Text(formattedDate(date))
-                    .padding(.leading)
-            }
+//            ForEach(contact.previousContacts, id: \.self) { date in
+//                Text(formattedDate(date))
+//                    .padding(.leading)
+//            }
             
             // Add description display
             Text("Description:")
                 .font(.headline)
                 .padding(.top)
             
-            Text(contact.description)
+            Text("This is where content descripton should go")
                 .padding(.leading)
 
             Spacer()
@@ -223,8 +234,8 @@ struct ContactInfoView: View {
         .padding()
         .onAppear {
             // Initialize the picker indexes when the view appears
-            currentRelationshipIndex = relationshipOptions.firstIndex(of: contact.currentRelationship) ?? 0
-            desiredRelationshipIndex = relationshipOptions.firstIndex(of: contact.desiredRelationship) ?? 0
+            currentRelationshipIndex = contact.curCloseness
+            desiredRelationshipIndex = contact.desiredCloseness
         }
     }
 
