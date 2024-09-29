@@ -17,14 +17,14 @@ struct ContentView: View {
             TabView {
                 SparksPage()
                     .tabItem {
-                        Image(.sparksSelectPage)
+                        Image(.sparks250X250)
                             .resizable().frame(width: 100, height: 100)
-                        Text("Sparks")
+                        //Text("SPARKS").foregroundStyle(Color.white)
                     }
                 ConnectionsPage()
                     .tabItem {
-                        Image(systemName: "person")
-                        Text("Connections")
+                        Image(.people250X250)
+                        //Text("Connections")
                     }
             }
         } else {

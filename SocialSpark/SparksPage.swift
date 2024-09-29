@@ -14,6 +14,7 @@ struct Task: Identifiable {
     var isCompleted: Bool
 }
 
+
 import SwiftUI
 
 struct SparksPage: View {
@@ -24,7 +25,8 @@ struct SparksPage: View {
     ]
 
     var body: some View {
-        ZStack { // ZStack to place the background color underneath the content
+        ZStack {
+            // Background gradient
             let customPink = UIColor(red: 0xF0, green: 0xB4, blue: 0xFF).color
             let customPurple = UIColor(red: 0x6D, green: 0x78, blue: 0xED).color
             LinearGradient(
@@ -33,36 +35,53 @@ struct SparksPage: View {
                 endPoint: .bottom
             )
             .edgesIgnoringSafeArea(.all)
+
             VStack(spacing: 0) {
                 // Custom header image
-                Image("Sparks")
+                Image(.sparksTitle)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 80) // Adjust as needed
                     .padding(.top, 20) // Optional top padding
-                    .frame(maxWidth: .infinity, alignment: .leading).padding(.leading, 20)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 20)
                 
-                // Task list
+                // Task list with white background boxes and spacing in between
                 List {
                     ForEach(tasks.indices, id: \.self) { index in
-                        HStack {
-                            Button(action: {
-                                tasks[index].isCompleted.toggle()
-                            }) {
-                                Image(tasks[index].isCompleted ? "sparklesCheckBox" : "sparklesCheckBox")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .padding(.trailing, 10) // Add padding between the image and the text
-                            }
-                            Text(tasks[index].name).font(.system(size: 20, weight: .regular, design: .serif)).foregroundColor(Color.gray)
-                                .strikethrough(tasks[index].isCompleted, color: .black)
-                                .foregroundColor(tasks[index].isCompleted ? .gray : .black)
-                        }
+                        ZStack {
+                            // White box background
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white)
+                                .shadow(radius: 1)
 
+                            // Content aligned to the left
+                            HStack {
+                                Button(action: {
+                                    tasks[index].isCompleted.toggle()
+                                }) {
+                                    Image(tasks[index].isCompleted ? "sparklesCheckBox" : "sparklesCheckBox")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                }
+                                .padding(.leading, 20) // Left padding for the spark icon
+
+                                Text(tasks[index].name)
+                                    .font(.system(size: 20, weight: .regular, design: .serif))
+                                    .foregroundColor(tasks[index].isCompleted ? .gray : .black)
+                                    .strikethrough(tasks[index].isCompleted, color: .black) // Strikethrough when completed
+                                    .padding(.leading, 10) // Left padding for the text
+                                Spacer() // Pushes content to the left
+                            }
+                            .padding(.vertical, 10) // Padding inside the white box
+                            .frame(maxWidth: .infinity, alignment: .leading) // Align the content to the left
+                        }
+                        .padding(.vertical, 5) // Padding between the white boxes to show the gradient
+                        .listRowBackground(Color.clear) // Ensure the row background is transparent
                     }
                 }
-                .listStyle(PlainListStyle())
-            } //VStack ending
+                .listStyle(PlainListStyle()) // Optional: List style adjustment
+            }
         }
     }
 }

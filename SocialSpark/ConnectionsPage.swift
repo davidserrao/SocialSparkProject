@@ -21,58 +21,93 @@ struct Contact: Codable, Identifiable {
     var minIFTime: Int
     
     enum CodingKeys: String, CodingKey {
-            case id = "contactid"          // Maps JSON "userid" to Swift "id"
-            case fname
-            case lname
-            case pnumber
-            case email
-            case curCloseness
-            case desiredCloseness
-            case minIFCount
-            case minIFTime
-        }
+        case id = "contactid"
+        case fname
+        case lname
+        case pnumber
+        case email
+        case curCloseness
+        case desiredCloseness
+        case minIFCount
+        case minIFTime
+    }
 }
-
 
 struct ConnectionsPage: View {
     @StateObject private var viewModel = ConnectionsViewModel()
     @State private var selectedContact: Contact? = nil
     @State private var isShowingContactInfo = false
-    @State private var isShowingAddContact = false // New state for showing the add/edit popup
-    @State private var isShowingContacts = false
+    @State private var isShowingAddContact = false
 
     var body: some View {
         NavigationView {
-            List(viewModel.contacts) { contact in
-                Button(action: {
-                    selectedContact = contact
-                    isShowingContactInfo = true
-                }) {
-                    HStack {
-                        Text(contact.fname)
+            VStack {
+                // Header image, left-aligned
+                Image("ConnectionsHeader")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 60) // Adjust height for header
+                    .frame(maxWidth: .infinity, alignment: .leading) // Left-align the header
+                    .padding(.leading, 15) // Add padding from the left
+                    .padding(.top, 20) // Optional top padding for spacing
+
+                // HStack for the buttons, positioned below the header
+                HStack {
+                    Button(action: {
+                        viewModel.importContacts()
+                    }) {
+                        Text("IMPORT CONTACTS")
                             .font(.headline)
-                            .foregroundColor(.primary)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.leading, 15) // Align the "Import Contacts" to the left
+
+                    Spacer() // Push the "+" button to the right
+
+                    Button(action: {
+                        isShowingAddContact = true
+                    }) {
+                        Image(systemName: "plus")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.trailing, 15) // Align "+" button to the right
+                }
+                .padding(.top, -10) // Add space between the header and the button row
+                .padding(.leading, 5)
+
+                Spacer() // Push content down to give space for header/buttons
+
+                // The list of contacts
+                List(viewModel.contacts) { contact in
+                    Button(action: {
+                        selectedContact = contact
+                        isShowingContactInfo = true
+                    }) {
+                        HStack {
+                            Text(contact.fname)
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
                     }
                 }
+                .listStyle(PlainListStyle())
             }
-            .navigationTitle("Connections")
-            .navigationBarItems(leading: Button(action: {
-                viewModel.importContacts()
-            }) {
-                Text("Import Contacts")
-                    .font(.headline)
-                    .foregroundColor(.blue)
-            }, trailing: Button(action: {
-                isShowingAddContact = true
-            }) {
-                Image(systemName: "plus")
-                    .font(.title2)
-            })
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        UIColor(red: 0x6D, green: 0x78, blue: 0xED).color,
+                        UIColor(red: 0xF0, green: 0xB4, blue: 0xFF).color
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .edgesIgnoringSafeArea(.all)
+            )
             .sheet(item: $selectedContact) { contact in
-                // Pass the selected contact to the sheet
                 ContactInfoView(contact: contact)
             }
             .sheet(isPresented: $isShowingAddContact) {
@@ -85,6 +120,9 @@ struct ConnectionsPage: View {
     }
 }
 
+
+
+
 // View for adding or editing a contact
 struct AddEditContactView: View {
     @ObservedObject var viewModel: ConnectionsViewModel
@@ -95,9 +133,9 @@ struct AddEditContactView: View {
     @State private var currentRelationship: String = "Undefined"
     @State private var desiredRelationship: String = "Undefined"
     @State private var description: String = ""
-    
+
     let relationshipOptions = ["Undefined", "Stranger", "Acquaintances", "Friends", "Close Friends", "Best Friends"]
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -106,7 +144,7 @@ struct AddEditContactView: View {
                     TextField("Phone Number", text: $phoneNumber).keyboardType(.numberPad)
                     TextField("Email", text: $email)
                 }
-                
+
                 Section(header: Text("Relationships")) {
                     Picker("Current Relationship", selection: $currentRelationship) {
                         ForEach(relationshipOptions, id: \.self) {
@@ -119,8 +157,7 @@ struct AddEditContactView: View {
                         }
                     }
                 }
-                
-                // Add description input
+
                 Section(header: Text("Description")) {
                     TextEditor(text: $description)
                         .frame(height: 100)
@@ -128,7 +165,7 @@ struct AddEditContactView: View {
                         .overlay(RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray.opacity(0.5), lineWidth: 1))
                 }
-                
+
                 Section {
                     Button("Save Contact") {
                         saveContact()
@@ -142,7 +179,7 @@ struct AddEditContactView: View {
             })
         }
     }
-    
+
     private func saveContact() {
         let newContact = Contact(
             fname: name,
@@ -165,22 +202,18 @@ struct ContactInfoView: View {
     @State private var currentRelationshipIndex: Int = 0
     @State private var desiredRelationshipIndex: Int = 0
 
-    // Options for relationships
-    let relationshipOptions = ["Undefined","Stranger", "Acquaintances", "Friends", "Close Friends", "Best Friends"]
+    let relationshipOptions = ["Undefined", "Stranger", "Acquaintances", "Friends", "Close Friends", "Best Friends"]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("\(contact.fname)")
                 .font(.largeTitle)
-            
-            // Phone #
+
             Text("Phone Number: \(contact.pnumber)")
-            
-            // Phone #
+
             Text("Email: \(contact.email)")
-            
-            // Current Relationship Dropdown
-            HStack() {
+
+            HStack {
                 Text("Current Relationship:")
                 Spacer()
                 Picker("Current Relationship", selection: $currentRelationshipIndex) {
@@ -191,9 +224,7 @@ struct ContactInfoView: View {
                 .pickerStyle(MenuPickerStyle())
             }
 
-
-            // Desired Relationship Dropdown
-            HStack() {
+            HStack {
                 Text("Desired Relationship:")
                 Spacer()
                 Picker("Desired Relationship", selection: $desiredRelationshipIndex) {
@@ -204,34 +235,24 @@ struct ContactInfoView: View {
                 .pickerStyle(MenuPickerStyle())
             }
 
-            // Last Contacted Date
             Text("Last Contacted: \(formattedDate(Date()))")
                 .font(.title3)
 
-            // List of Previous Contacts
             Text("Previous Contacts:")
                 .font(.headline)
                 .padding(.top)
 
-//            ForEach(contact.previousContacts, id: \.self) { date in
-//                Text(formattedDate(date))
-//                    .padding(.leading)
-//            }
-            
-            // Add description display
             Text("Description:")
                 .font(.headline)
                 .padding(.top)
-            
-            Text("This is where content descripton should go")
+
+            Text("This is where content description should go")
                 .padding(.leading)
 
             Spacer()
 
-            // Close Button
             Button(action: {
                 // action for closing
-                
             }) {
                 Text("Edit")
                     .font(.title2)
@@ -242,13 +263,11 @@ struct ContactInfoView: View {
         }
         .padding()
         .onAppear {
-            // Initialize the picker indexes when the view appears
             currentRelationshipIndex = contact.curCloseness
             desiredRelationshipIndex = contact.desiredCloseness
         }
     }
 
-    // Helper function to format date
     private func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -256,6 +275,8 @@ struct ContactInfoView: View {
         return formatter.string(from: date)
     }
 }
+
+
 
 // Preview provider
 struct ConnectionsPage_Previews: PreviewProvider {
