@@ -14,6 +14,9 @@ struct SparkTask: Identifiable, Codable {
     var isCompleted: Bool
 }
 
+
+import SwiftUI
+
 struct SparksPage: View {
     // Using the view model to manage tasks
     @StateObject private var viewModel = SparksViewModel()
@@ -39,19 +42,23 @@ struct SparksPage: View {
                             .foregroundColor(task.isCompleted ? .gray : .black)
                     }
                 }
-            }
-            .navigationTitle("Sparks")
-            .navigationBarItems(trailing: Button(action: {
-                Task {
-                    await viewModel.fetchTasks()
-                }
-            }) {
-                Text("Regenerate Sparks").foregroundColor(Color.blue)
-            })
-            .task {
-                await viewModel.fetchTasks()
+                .listStyle(PlainListStyle()) // Optional: List style adjustment
             }
         }
+    }
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        let newRed = CGFloat(red)/255
+        let newGreen = CGFloat(green)/255
+        let newBlue = CGFloat(blue)/255
+        
+        self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+    }
+    
+    var color: Color {
+        Color(self)
     }
 }
 
