@@ -169,7 +169,7 @@ struct ContactInfoView: View {
             Text("Phone Number: \(contact.pnumber)")
             
             // Phone #
-            Text("Email: \(contact.email)")
+//            Text("Email: \(contact.email)")
             
             // Current Relationship Dropdown
             HStack() {

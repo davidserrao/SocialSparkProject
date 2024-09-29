@@ -22,6 +22,7 @@
 		E7F657B52CA869C7001513DB /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657B42CA869C7001513DB /* EmailViewModel.swift */; };
 		E7F657B72CA869E7001513DB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657B62CA869E7001513DB /* AuthManager.swift */; };
 		E7F657B92CA86AE9001513DB /* ConnectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657B82CA86AE9001513DB /* ConnectionsViewModel.swift */; };
+		E7F657C92CA8F531001513DB /* SparksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F657C82CA8F531001513DB /* SparksViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		E7F657B42CA869C7001513DB /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		E7F657B62CA869E7001513DB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		E7F657B82CA86AE9001513DB /* ConnectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsViewModel.swift; sourceTree = "<group>"; };
+		E7F657C82CA8F531001513DB /* SparksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparksViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				E7F657AB2CA7CEF9001513DB /* StatsPage.swift */,
 				E7F657B62CA869E7001513DB /* AuthManager.swift */,
 				E7F657B82CA86AE9001513DB /* ConnectionsViewModel.swift */,
+				E7F657C82CA8F531001513DB /* SparksViewModel.swift */,
 				E7F6577F2CA7BE20001513DB /* Assets.xcassets */,
 				E7F657812CA7BE21001513DB /* Preview Content */,
 				E7F657B22CA7ED13001513DB /* Auth0.plist */,
@@ -289,6 +292,7 @@
 			files = (
 				E7F657A82CA7CEA1001513DB /* ConnectionsPage.swift in Sources */,
 				E7F657B72CA869E7001513DB /* AuthManager.swift in Sources */,
+				E7F657C92CA8F531001513DB /* SparksViewModel.swift in Sources */,
 				E7F657B52CA869C7001513DB /* EmailViewModel.swift in Sources */,
 				E7F657AC2CA7CEF9001513DB /* StatsPage.swift in Sources */,
 				E7F657B92CA86AE9001513DB /* ConnectionsViewModel.swift in Sources */,

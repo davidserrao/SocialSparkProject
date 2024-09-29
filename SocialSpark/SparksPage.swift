@@ -8,29 +8,25 @@
 import SwiftUI
 
 // Model for the task
-struct Task: Identifiable {
-    let id = UUID()
+struct Task: Identifiable, Codable {
+    var id = UUID()
     var name: String
     var isCompleted: Bool
 }
 
 struct SparksPage: View {
-    // State to hold the list of tasks
-    @State private var tasks: [Task] = [
-        Task(name: "Call James", isCompleted: false),
-        Task(name: "Hit up David", isCompleted: false),
-        Task(name: "Text Yash", isCompleted: false)
-    ]
-
+    // Using the view model to manage tasks
+    @StateObject private var viewModel = SparksViewModel()
+    
     var body: some View {
-        NavigationView{
+        NavigationView {
             List {
-                ForEach(tasks) { task in
+                ForEach(viewModel.tasks) { task in
                     HStack {
                         // Checkbox (Toggle)
                         Button(action: {
-                            if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-                                tasks[index].isCompleted.toggle()
+                            if let index = viewModel.tasks.firstIndex(where: { $0.id == task.id }) {
+                                viewModel.tasks[index].isCompleted.toggle()
                             }
                         }) {
                             Image(systemName: task.isCompleted ? "checkmark.square" : "square")
@@ -40,15 +36,19 @@ struct SparksPage: View {
                         Text(task.name)
                             .strikethrough(task.isCompleted, color: .black)
                             .foregroundColor(task.isCompleted ? .gray : .black)
-
-                        
                     }
                 }
             }
             .navigationTitle("Sparks")
+            .onAppear {
+                // Fetch tasks when the view appears
+                viewModel.fetchTasks()
+            }
         }
     }
 }
+
 #Preview {
     SparksPage()
 }
+
