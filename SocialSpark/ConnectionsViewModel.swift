@@ -10,10 +10,10 @@ import Combine
 
 // ViewModel to handle API calls and store contacts
 class ConnectionsViewModel: ObservableObject {
-    @Published var contacts: [Contact] = []
+    @Published var contacts: [ServerContact] = []
 
     // Function to fetch contacts from an API
-    func fetchContacts() async {
+    func fetchServerContacts() async {
         guard let url = URL(string: "http://127.0.0.1:8000/api/get/contacts/1") else {
             print("Invalid URL")
             return
@@ -31,7 +31,7 @@ class ConnectionsViewModel: ObservableObject {
 
             if let data = data {
                 do {
-                    let decodedContacts = try JSONDecoder().decode([Contact].self, from: data)
+                    let decodedContacts = try JSONDecoder().decode([ServerContact].self, from: data)
                     print(decodedContacts.map { $0.id })
                     DispatchQueue.main.async {
                         self.contacts = decodedContacts
@@ -45,7 +45,7 @@ class ConnectionsViewModel: ObservableObject {
     }
 
     // Function to add a contact using an API (POST)
-    func addContact(_ contact: Contact) {
+    func addContact(_ contact: ServerContact) {
         guard let url = URL(string: "http://127.0.0.1:8000/api/create/contact/1") else {
             print("Invalid URL")
             return
@@ -68,8 +68,9 @@ class ConnectionsViewModel: ObservableObject {
 
                 // Handle success response if needed
                 if let data = data {
+                    
                     do {
-                        let addedContact = try JSONDecoder().decode(Contact.self, from: data)
+                        let addedContact = try JSONDecoder().decode(ServerContact.self, from: data)
                         DispatchQueue.main.async {
                             self.contacts.append(addedContact)
                         }
@@ -85,7 +86,7 @@ class ConnectionsViewModel: ObservableObject {
     }
 
     // Function to update a contact using an API (PUT)
-    func updateContact(_ contact: Contact) {
+    func updateContact(_ contact: ServerContact) {
         let contactId = contact.id
 
         guard let url = URL(string: "https://yourapi.com/contacts/\(contactId)") else {
@@ -111,7 +112,7 @@ class ConnectionsViewModel: ObservableObject {
                 // Handle success response if needed
                 if let data = data {
                     do {
-                        let updatedContact = try JSONDecoder().decode(Contact.self, from: data)
+                        let updatedContact = try JSONDecoder().decode(ServerContact.self, from: data)
                         DispatchQueue.main.async {
                             if let index = self.contacts.firstIndex(where: { $0.id == contact.id }) {
                                 self.contacts[index] = updatedContact

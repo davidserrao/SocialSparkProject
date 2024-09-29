@@ -45,13 +45,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         // Create a date component for 9 AM
         var dateComponents = DateComponents()
-        dateComponents.hour = 9 // 9 AM
-        dateComponents.minute = 0
+        dateComponents.hour = 20 // 9 AM
+        dateComponents.minute = 11
 
         // Create a trigger that fires every day at 9 AM
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
-        // Create a request
+        // Create a requestj
         let request = UNNotificationRequest(identifier: "dailyReminder", content: content, trigger: trigger)
 
     }

@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import ContactsUI
+import Combine
 
 // Model for the contact
-struct Contact: Codable, Identifiable {
+struct ServerContact: Codable, Identifiable {
     var id: Int?
     var fname: String
     var lname: String
@@ -18,6 +20,7 @@ struct Contact: Codable, Identifiable {
     var desiredCloseness: Int
     var minIFCount: Int
     var minIFTime: Int
+    var descript: String?
     
     enum CodingKeys: String, CodingKey {
             case id = "contactid"          // Maps JSON "userid" to Swift "id"
@@ -29,20 +32,47 @@ struct Contact: Codable, Identifiable {
             case desiredCloseness
             case minIFCount
             case minIFTime
+            case descript
         }
+}
+
+class ContactDelegate: NSObject, CNContactPickerDelegate {
+    @Published var selectedContacts: [CNContact] = []
+    
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+        selectedContacts = contacts
+    }
+    
+    
 }
 
 
 struct ConnectionsPage: View {
     @StateObject private var viewModel = ConnectionsViewModel()
-    @State private var selectedContact: Contact? = nil
+    @State private var selectedContact: ServerContact? = nil
     @State private var isShowingContactInfo = false
     @State private var isShowingAddContact = false // New state for showing the add/edit popup
+    @State private var isShowingImportContacts = false
+    
+    private var contactPickerCoordinator = ContactDelegate()
 
+    func openContactPicker() {
+        let contactPicker = CNContactPickerViewController()
+        contactPicker.delegate = contactPickerCoordinator
+        //        contactPicker.displayedPropertyKeys = [CNContactPhoneNumbersKey]
+//        contactPicker.predicateForEnablingContact = NSPredicate(format: "phoneNumbers.@count > 0")
+//        contactPicker.predicateForSelectionOfContact = NSPredicate(format: "phoneNumbers.@count == 1")
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let window = windowScenes?.windows.first
+        window?.rootViewController?.present(contactPicker, animated: true, completion: nil)
+    }
+    
     var body: some View {
         NavigationView {
             List(viewModel.contacts) { contact in
                 Button(action: {
+                    print(selectedContact)
                     selectedContact = contact
                     isShowingContactInfo = true
                 }) {
@@ -57,7 +87,12 @@ struct ConnectionsPage: View {
                 }
             }
             .navigationTitle("Connections")
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: Button(action: {
+                openContactPicker()
+            }) {
+                Text("Import Contacts")
+                    .font(.title2)
+            }, trailing: Button(action: {
                 isShowingAddContact = true
             }) {
                 Image(systemName: "plus")
@@ -65,27 +100,57 @@ struct ConnectionsPage: View {
             })
             .sheet(item: $selectedContact) { contact in
                 // Pass the selected contact to the sheet
-                ContactInfoView(contact: contact)
+                ContactInfoView(contact: contact, isShowingAddContact: $isShowingAddContact, isShowingContactInfo: $isShowingContactInfo, selectedContact: $selectedContact)
             }
             .sheet(isPresented: $isShowingAddContact) {
-                AddEditContactView(viewModel: viewModel, isShowing: $isShowingAddContact)
+                AddEditContactView(viewModel: viewModel,  isShowing: $isShowingAddContact, selectedContact: $selectedContact)
             }
             .task {
-                await viewModel.fetchContacts()
+                await viewModel.fetchServerContacts()
+            }
+            .onReceive(contactPickerCoordinator.$selectedContacts) { contacts in
+                
+                for c in contacts {
+                    
+                    var serverContact = ServerContact(
+                        fname: c.givenName,
+                        lname: c.familyName,
+                        pnumber: 0,//phoneNumberToInt(contact: c) ?? 0,
+                        curCloseness: 0,
+                        desiredCloseness: 0,
+                        minIFCount: 0,
+                        minIFTime: 0
+                    )
+                    viewModel.addContact(serverContact)
+                }
             }
         }
     }
+}
+
+func phoneNumberToInt(contact: CNContact) -> Int? {
+    // Assuming we take the first phone number
+    guard let phoneNumber = contact.phoneNumbers.first?.value.stringValue else {
+        return nil
+    }
+    
+    // Remove non-numeric characters
+    let numericString = phoneNumber.filter { "0123456789".contains($0) }
+    
+    // Convert to Int
+    return Int(numericString)
 }
 
 // View for adding or editing a contact
 struct AddEditContactView: View {
     @ObservedObject var viewModel: ConnectionsViewModel
     @Binding var isShowing: Bool
+    @Binding var selectedContact: ServerContact?
     @State private var name: String = ""
     @State private var phoneNumber: String = ""
     @State private var email: String = ""
-    @State private var currentRelationship: String = "Undefined"
-    @State private var desiredRelationship: String = "Undefined"
+    @State private var currentRelationship: Int = 0
+    @State private var desiredRelationship: Int = 0
     @State private var description: String = ""
     
     let relationshipOptions = ["Undefined", "Stranger", "Acquaintances", "Friends", "Close Friends", "Best Friends"]
@@ -101,15 +166,15 @@ struct AddEditContactView: View {
                 
                 Section(header: Text("Relationships")) {
                     Picker("Current Relationship", selection: $currentRelationship) {
-                        ForEach(relationshipOptions, id: \.self) {
-                            Text($0)
-                        }
-                    }
+                        ForEach(0..<relationshipOptions.count, id: \.self) { index in
+                                            Text(relationshipOptions[index])
+                                                .tag(index)
+                                        }                    }
                     Picker("Desired Relationship", selection: $desiredRelationship) {
-                        ForEach(relationshipOptions, id: \.self) {
-                            Text($0)
-                        }
-                    }
+                        ForEach(0..<relationshipOptions.count, id: \.self) { index in
+                                            Text(relationshipOptions[index])
+                                                .tag(index)
+                                        }                    }
                 }
                 
                 // Add description input
@@ -132,17 +197,36 @@ struct AddEditContactView: View {
             .navigationBarItems(leading: Button("Cancel") {
                 isShowing = false
             })
+            .onAppear {
+                        if let contact = selectedContact {
+                            // Populate the fields with selected contact's information
+                            name = contact.fname // Assuming ServerContact has a 'name' property
+                            phoneNumber = String(contact.pnumber) // Assuming ServerContact has a 'phoneNumber' property
+                            email = contact.email ?? "" // Assuming ServerContact has an 'email' property
+                            currentRelationship = contact.curCloseness
+                            desiredRelationship = contact.desiredCloseness
+                            description = contact.descript ?? "No description provided"// Assuming ServerContact has a 'description' property
+                        } else {
+                            // Set default values if no contact is selected
+                            name = ""
+                            phoneNumber = ""
+                            email = ""
+                            currentRelationship = 0
+                            desiredRelationship = 0
+                            description = ""
+                        }
+                    }
         }
     }
     
     private func saveContact() {
-        let newContact = Contact(
+        let newContact = ServerContact(
             fname: name,
             lname: name,
             pnumber: Int(phoneNumber) ?? 0,
             email: email,
-            curCloseness: Int(currentRelationship) ?? -1,
-            desiredCloseness: Int(desiredRelationship) ?? -1,
+            curCloseness: currentRelationship,
+            desiredCloseness: desiredRelationship,
             minIFCount: -1,
             minIFTime: -1
         )
@@ -153,7 +237,11 @@ struct AddEditContactView: View {
 
 // View for showing contact info
 struct ContactInfoView: View {
-    var contact: Contact
+    var contact: ServerContact
+    @Binding var isShowingAddContact: Bool
+    @Binding var isShowingContactInfo: Bool
+    @Binding var selectedContact: ServerContact?
+
     @State private var currentRelationshipIndex: Int = 0
     @State private var desiredRelationshipIndex: Int = 0
 
@@ -169,7 +257,7 @@ struct ContactInfoView: View {
             Text("Phone Number: \(contact.pnumber)")
             
             // Phone #
-            Text("Email: \(contact.email)")
+            Text("Email: \(contact.email ?? "No email")")
             
             // Current Relationship Dropdown
             HStack() {
@@ -223,6 +311,10 @@ struct ContactInfoView: View {
             // Close Button
             Button(action: {
                 // action for closing
+                isShowingAddContact = true
+                isShowingContactInfo = false
+                selectedContact = contact
+
             }) {
                 Text("Edit")
                     .font(.title2)
@@ -232,10 +324,12 @@ struct ContactInfoView: View {
             .frame(maxWidth: .infinity, alignment: .center)
         }
         .padding()
-        .onAppear {
+        .onAppear() {
             // Initialize the picker indexes when the view appears
+            selectedContact = contact
             currentRelationshipIndex = contact.curCloseness
             desiredRelationshipIndex = contact.desiredCloseness
+            print(selectedContact)
         }
     }
 
