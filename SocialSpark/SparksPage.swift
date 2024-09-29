@@ -96,7 +96,6 @@ struct SparksPage: View {
                 }
                 .listStyle(PlainListStyle()) // Optional: List style adjustment
             }
-<<<<<<< Updated upstream
             .navigationTitle("Sparks")
             .navigationBarItems(trailing: Button(action: {
                 Task {
@@ -108,11 +107,9 @@ struct SparksPage: View {
             .task {
                 await viewModel.fetchTasks()
             }}
-=======
         }
->>>>>>> Stashed changes
     }
-}
+
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
