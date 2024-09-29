@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72342E122CA9064500448F31 /* SparksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72342E112CA9064500448F31 /* SparksViewModel.swift */; };
 		72D6CBE52CA8E12000507118 /* ContactPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D6CBE42CA8E12000507118 /* ContactPickerView.swift */; };
 		E7F6577C2CA7BE1F001513DB /* SocialSparkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */; };
 		E7F6577E2CA7BE1F001513DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F6577D2CA7BE1F001513DB /* ContentView.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		72342E112CA9064500448F31 /* SparksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparksViewModel.swift; sourceTree = "<group>"; };
 		72D6CBE42CA8E12000507118 /* ContactPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerView.swift; sourceTree = "<group>"; };
 		E7F657782CA7BE1F001513DB /* SocialSpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialSpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSparkApp.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		E7F6577A2CA7BE1F001513DB /* SocialSpark */ = {
 			isa = PBXGroup;
 			children = (
+				72342E112CA9064500448F31 /* SparksViewModel.swift */,
 				72D6CBE42CA8E12000507118 /* ContactPickerView.swift */,
 				E7F657BC2CA8E1D3001513DB /* Info.plist */,
 				E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */,
@@ -297,6 +300,7 @@
 			files = (
 				E7F657A82CA7CEA1001513DB /* ConnectionsPage.swift in Sources */,
 				E7F657B72CA869E7001513DB /* AuthManager.swift in Sources */,
+				72342E122CA9064500448F31 /* SparksViewModel.swift in Sources */,
 				72D6CBE52CA8E12000507118 /* ContactPickerView.swift in Sources */,
 				E7F657B52CA869C7001513DB /* EmailViewModel.swift in Sources */,
 				E7F657BE2CA8E285001513DB /* AppDelegate.swift in Sources */,

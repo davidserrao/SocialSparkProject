@@ -40,9 +40,8 @@ struct SparksPage: View {
                 }
             }
             .navigationTitle("Sparks")
-            .onAppear {
-                // Fetch tasks when the view appears
-                viewModel.fetchTasks()
+            .task {
+                await viewModel.fetchTasks()
             }
         }
     }
