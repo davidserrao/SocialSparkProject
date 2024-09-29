@@ -17,18 +17,14 @@ struct ContentView: View {
             TabView {
                 SparksPage()
                     .tabItem {
-                        Image(systemName: "house")
+                        Image(.sparksSelectPage)
+                            .resizable().frame(width: 100, height: 100)
                         Text("Sparks")
                     }
                 ConnectionsPage()
                     .tabItem {
                         Image(systemName: "person")
                         Text("Connections")
-                    }
-                StatsPage()
-                    .tabItem {
-                        Image(systemName: "circle")
-                        Text("Stats")
                     }
             }
         } else {
