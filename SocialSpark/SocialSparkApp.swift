@@ -36,7 +36,7 @@ struct SocialSparkApp: App {
     func scheduleDailyNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Check out your new Sparks!"
-        content.body = "Time to see your latest sparks!"
+        content.body = "Time to start some great conversations!"
         content.sound = .default
 
         var dateComponents = DateComponents()
