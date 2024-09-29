@@ -88,29 +88,6 @@ struct ConnectionsPage: View {
                     .padding(.top, 20) // Optional top padding for spacing
 
                 // HStack for the buttons, positioned below the header
-                HStack {
-                    Button(action: {
-                        viewModel.importContacts()
-                    }) {
-                        Text("IMPORT CONTACTS")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                    }
-                    .padding(.leading, 15) // Align the "Import Contacts" to the left
-
-                    Spacer() // Push the "+" button to the right
-
-                    Button(action: {
-                        isShowingAddContact = true
-                    }) {
-                        Image(systemName: "plus")
-                            .font(.title2)
-                            .foregroundColor(.white)
-                    }
-                    .padding(.trailing, 15) // Align "+" button to the right
-                }
-                .padding(.top, -10) // Add space between the header and the button row
-                .padding(.leading, 5)
 
                 Spacer() // Push content down to give space for header/buttons
 
@@ -160,11 +137,8 @@ struct ConnectionsPage: View {
                 )
                 .edgesIgnoringSafeArea(.all)
             )
-            .sheet(item: $selectedContact) { contact in
-                ContactInfoView(contact: contact)
-            }
             .sheet(isPresented: $isShowingAddContact) {
-                AddEditContactView(viewModel: viewModel, isShowing: $isShowingAddContact, selectedContact: $selectedContact)
+                            AddEditContactView(viewModel: viewModel, isShowing: $isShowingAddContact, selectedContact: $selectedContact)
             }
             .task {
                 await viewModel.fetchServerContacts()

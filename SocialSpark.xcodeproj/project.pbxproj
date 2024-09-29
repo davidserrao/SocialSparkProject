@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7219FB2E2CA957FB00D9F45E /* SparkCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7219FB2D2CA957FB00D9F45E /* SparkCreate.swift */; };
+		72342E142CA957C500448F31 /* AppDelegate 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72342E132CA957C500448F31 /* AppDelegate 2.swift */; };
 		E7F6577C2CA7BE1F001513DB /* SocialSparkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */; };
 		E7F6577E2CA7BE1F001513DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F6577D2CA7BE1F001513DB /* ContentView.swift */; };
 		E7F657802CA7BE20001513DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F6577F2CA7BE20001513DB /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7219FB2D2CA957FB00D9F45E /* SparkCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkCreate.swift; sourceTree = "<group>"; };
+		72342E132CA957C500448F31 /* AppDelegate 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate 2.swift"; sourceTree = "<group>"; };
 		E7F657782CA7BE1F001513DB /* SocialSpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialSpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSparkApp.swift; sourceTree = "<group>"; };
 		E7F6577D2CA7BE1F001513DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 		E7F6577A2CA7BE1F001513DB /* SocialSpark */ = {
 			isa = PBXGroup;
 			children = (
+				7219FB2D2CA957FB00D9F45E /* SparkCreate.swift */,
+				72342E132CA957C500448F31 /* AppDelegate 2.swift */,
 				E7F6577B2CA7BE1F001513DB /* SocialSparkApp.swift */,
 				E7F6577D2CA7BE1F001513DB /* ContentView.swift */,
 				E7F657A52CA7CE66001513DB /* SparksPage.swift */,
@@ -290,7 +296,9 @@
 				E7F657A82CA7CEA1001513DB /* ConnectionsPage.swift in Sources */,
 				E7F657B72CA869E7001513DB /* AuthManager.swift in Sources */,
 				E7F657B52CA869C7001513DB /* EmailViewModel.swift in Sources */,
+				7219FB2E2CA957FB00D9F45E /* SparkCreate.swift in Sources */,
 				E7F657AC2CA7CEF9001513DB /* StatsPage.swift in Sources */,
+				72342E142CA957C500448F31 /* AppDelegate 2.swift in Sources */,
 				E7F657B92CA86AE9001513DB /* ConnectionsViewModel.swift in Sources */,
 				E7F6577E2CA7BE1F001513DB /* ContentView.swift in Sources */,
 				E7F6577C2CA7BE1F001513DB /* SocialSparkApp.swift in Sources */,
