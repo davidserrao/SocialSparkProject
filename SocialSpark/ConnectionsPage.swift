@@ -21,6 +21,10 @@ struct ServerContact: Codable, Identifiable {
     var minIFCount: Int
     var minIFTime: Int
     var descript: String?
+    var label: String?
+    var activeflag: Int = 1
+    var location: String?
+
     
     enum CodingKeys: String, CodingKey {
             case id = "contactid"          // Maps JSON "userid" to Swift "id"
@@ -33,6 +37,9 @@ struct ServerContact: Codable, Identifiable {
             case minIFCount
             case minIFTime
             case descript
+            case label
+            case activeflag
+            case location
         }
 }
 
@@ -72,9 +79,8 @@ struct ConnectionsPage: View {
         NavigationView {
             List(viewModel.contacts) { contact in
                 Button(action: {
-                    print(selectedContact)
                     selectedContact = contact
-                    isShowingContactInfo = true
+                    isShowingAddContact = true
                 }) {
                     HStack {
                         Text(contact.fname)
@@ -93,17 +99,18 @@ struct ConnectionsPage: View {
                 Text("Import Contacts")
                     .font(.title2)
             }, trailing: Button(action: {
+                selectedContact = nil
                 isShowingAddContact = true
             }) {
                 Image(systemName: "plus")
                     .font(.title2)
             })
-            .sheet(item: $selectedContact) { contact in
-                // Pass the selected contact to the sheet
-                ContactInfoView(contact: contact, isShowingAddContact: $isShowingAddContact, isShowingContactInfo: $isShowingContactInfo, selectedContact: $selectedContact)
-            }
+//            .sheet(item: $selectedContact) { contact in
+//                // Pass the selected contact to the sheet
+//                ContactInfoView(contact: contact, isShowingAddContact: $isShowingAddContact, isShowingContactInfo: $isShowingContactInfo)
+//            }
             .sheet(isPresented: $isShowingAddContact) {
-                AddEditContactView(viewModel: viewModel,  isShowing: $isShowingAddContact, selectedContact: $selectedContact)
+                AddEditContactView(viewModel: viewModel, isShowing: $isShowingAddContact, selectedContact: $selectedContact)
             }
             .task {
                 await viewModel.fetchServerContacts()
@@ -198,6 +205,7 @@ struct AddEditContactView: View {
                 isShowing = false
             })
             .onAppear {
+                print(selectedContact)
                         if let contact = selectedContact {
                             // Populate the fields with selected contact's information
                             name = contact.fname // Assuming ServerContact has a 'name' property
@@ -220,7 +228,9 @@ struct AddEditContactView: View {
     }
     
     private func saveContact() {
+        print(description)
         let newContact = ServerContact(
+            id: selectedContact?.id,
             fname: name,
             lname: name,
             pnumber: Int(phoneNumber) ?? 0,
@@ -228,9 +238,14 @@ struct AddEditContactView: View {
             curCloseness: currentRelationship,
             desiredCloseness: desiredRelationship,
             minIFCount: -1,
-            minIFTime: -1
+            minIFTime: -1,
+            descript: description
         )
-        viewModel.addContact(newContact)
+        if selectedContact != nil {
+            viewModel.updateContact(newContact)
+        } else {
+            viewModel.addContact(newContact)
+        }
         isShowing = false
     }
 }
@@ -240,7 +255,6 @@ struct ContactInfoView: View {
     var contact: ServerContact
     @Binding var isShowingAddContact: Bool
     @Binding var isShowingContactInfo: Bool
-    @Binding var selectedContact: ServerContact?
 
     @State private var currentRelationshipIndex: Int = 0
     @State private var desiredRelationshipIndex: Int = 0
@@ -312,7 +326,6 @@ struct ContactInfoView: View {
                 // action for closing
                 isShowingAddContact = true
                 isShowingContactInfo = false
-                selectedContact = contact
 
             }) {
                 Text("Edit")
@@ -325,10 +338,8 @@ struct ContactInfoView: View {
         .padding()
         .onAppear() {
             // Initialize the picker indexes when the view appears
-            selectedContact = contact
             currentRelationshipIndex = contact.curCloseness
             desiredRelationshipIndex = contact.desiredCloseness
-            print(selectedContact)
         }
     }
 

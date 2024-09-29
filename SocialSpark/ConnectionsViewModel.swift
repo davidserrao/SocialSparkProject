@@ -89,14 +89,13 @@ class ConnectionsViewModel: ObservableObject {
     func updateContact(_ contact: ServerContact) {
         let contactId = contact.id
 
-        guard let url = URL(string: "https://yourapi.com/contacts/\(contactId)") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/api/update/contact/1/\(contactId ?? 0)") else {
             print("Invalid URL")
             return
         }
 
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
-        request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         do {

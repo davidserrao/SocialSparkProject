@@ -8,8 +8,8 @@
 import SwiftUI
 
 // Model for the task
-struct Task: Identifiable, Codable {
-    var id = UUID()
+struct SparkTask: Identifiable, Codable {
+    var id: String
     var name: String
     var isCompleted: Bool
 }
@@ -27,6 +27,7 @@ struct SparksPage: View {
                         Button(action: {
                             if let index = viewModel.tasks.firstIndex(where: { $0.id == task.id }) {
                                 viewModel.tasks[index].isCompleted.toggle()
+                                viewModel.complete_task(task: task)
                             }
                         }) {
                             Image(systemName: task.isCompleted ? "checkmark.square" : "square")
@@ -40,6 +41,13 @@ struct SparksPage: View {
                 }
             }
             .navigationTitle("Sparks")
+            .navigationBarItems(trailing: Button(action: {
+                Task {
+                    await viewModel.fetchTasks()
+                }
+            }) {
+                Text("Regenerate Sparks").foregroundColor(Color.blue)
+            })
             .task {
                 await viewModel.fetchTasks()
             }
