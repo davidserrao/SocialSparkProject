@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import Contacts
+
 
 // ViewModel to handle API calls and store contacts
 class ConnectionsViewModel: ObservableObject {
@@ -126,5 +128,11 @@ class ConnectionsViewModel: ObservableObject {
         } catch {
             print("Failed to encode contact: \(error)")
         }
+    }
+    
+    func importContacts() {
+        // Initialize the contact store.
+        var store = CNContactStore()
+
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Contacts
 
 // Model for the contact
 struct Contact: Codable, Identifiable {
@@ -38,6 +39,7 @@ struct ConnectionsPage: View {
     @State private var selectedContact: Contact? = nil
     @State private var isShowingContactInfo = false
     @State private var isShowingAddContact = false // New state for showing the add/edit popup
+    @State private var isShowingContacts = false
 
     var body: some View {
         NavigationView {
@@ -57,7 +59,13 @@ struct ConnectionsPage: View {
                 }
             }
             .navigationTitle("Connections")
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: Button(action: {
+                viewModel.importContacts()
+            }) {
+                Text("Import Contacts")
+                    .font(.headline)
+                    .foregroundColor(.blue)
+            }, trailing: Button(action: {
                 isShowingAddContact = true
             }) {
                 Image(systemName: "plus")
@@ -223,6 +231,7 @@ struct ContactInfoView: View {
             // Close Button
             Button(action: {
                 // action for closing
+                
             }) {
                 Text("Edit")
                     .font(.title2)
