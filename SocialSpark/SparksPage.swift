@@ -21,29 +21,82 @@ struct SparksPage: View {
     // Using the view model to manage tasks
     @StateObject private var viewModel = SparksViewModel()
     
+
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(viewModel.tasks) { task in
-                    HStack {
-                        // Checkbox (Toggle)
-                        Button(action: {
-                            if let index = viewModel.tasks.firstIndex(where: { $0.id == task.id }) {
-                                viewModel.tasks[index].isCompleted.toggle()
-                                viewModel.complete_task(task: task)
-                            }
-                        }) {
-                            Image(systemName: task.isCompleted ? "checkmark.square" : "square")
+        ZStack {
+            // Background gradient
+            let customPink = UIColor(red: 0xF0, green: 0xB4, blue: 0xFF).color
+            let customPurple = UIColor(red: 0x6D, green: 0x78, blue: 0xED).color
+            LinearGradient(
+                gradient: Gradient(colors: [customPink, customPurple]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
+
+            VStack(spacing: 0) {
+                // HStack for logo and button in the same row
+                HStack {
+                    // Custom header image
+                    Image("SparksTitle") // Corrected image name
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 80) // Adjust as needed
+                        .padding(.leading, 20)
+
+                    Spacer() // Pushes the button to the right
+
+                    // "Regenerate Sparks" button
+                    Button(action: {
+                        Task {
+                            await viewModel.fetchTasks()
                         }
-                        
-                        // Task name text
-                        Text(task.name)
-                            .strikethrough(task.isCompleted, color: .black)
-                            .foregroundColor(task.isCompleted ? .gray : .black)
+                    }) {
+                        Text("Regenerate Sparks").foregroundColor(Color.white)
+                    }
+                    .padding(.trailing, 20) // Padding from the right side
+                }
+                .padding(.top, 20) // Top padding for the HStack
+
+                // Task list
+                List {
+                    ForEach(viewModel.tasks) { task in
+                        ZStack {
+                            // White background for each task
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white)
+                                .shadow(radius: 1)
+
+                            // Task content
+                            HStack {
+                                // Checkbox (Toggle)
+                                Button(action: {
+                                    if let index = viewModel.tasks.firstIndex(where: { $0.id == task.id }) {
+                                        viewModel.tasks[index].isCompleted.toggle()
+                                        viewModel.complete_task(task: task)
+                                    }
+                                }) {
+                                    Image(systemName: task.isCompleted ? "checkmark.square" : "square")
+
+                                }
+
+                                // Task name text
+                                Text(task.name)
+                                    .strikethrough(task.isCompleted, color: .black)
+                                    .foregroundColor(task.isCompleted ? .gray : .black)
+
+                                Spacer()
+                            }
+                            .padding(.vertical, 10)
+                            .padding(.leading, 10) // Padding inside the white box
+                        }
+                        .padding(.vertical, 5) // Space between white boxes
+                        .listRowBackground(Color.clear) // Ensure the row background is transparent
                     }
                 }
                 .listStyle(PlainListStyle()) // Optional: List style adjustment
             }
+<<<<<<< Updated upstream
             .navigationTitle("Sparks")
             .navigationBarItems(trailing: Button(action: {
                 Task {
@@ -55,6 +108,9 @@ struct SparksPage: View {
             .task {
                 await viewModel.fetchTasks()
             }}
+=======
+        }
+>>>>>>> Stashed changes
     }
 }
 
