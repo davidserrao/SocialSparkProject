@@ -10,49 +10,51 @@ import UserNotifications
 
 @main
 struct SocialSparkApp: App {
-    // Use UIApplicationDelegateAdaptor to connect AppDelegate-like behavior
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    requestNotificationPermission()
+                }
         }
     }
-}
 
-// AppDelegate for handling notifications
-class AppDelegate: NSObject, UIApplicationDelegate {
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Request permission for notifications
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+    func requestNotificationPermission() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if granted {
                 print("Permission granted")
-                self.scheduleDailyNotification() // Call the notification scheduling function
+                scheduleDailyNotification()
             } else {
                 print("Permission denied")
             }
         }
-        return true
     }
-    
-    // The scheduleDailyNotification function goes here
+
     func scheduleDailyNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Daily Reminder"
-        content.body = "Spark some conversations today with your new daily suggestions!"
+        content.title = "Check out your new Sparks!"
+        content.body = "Time to start some great conversations!"
         content.sound = .default
 
-        // Create a date component for 9 AM
         var dateComponents = DateComponents()
-        dateComponents.hour = 20 // 9 AM
-        dateComponents.minute = 11
+        dateComponents.hour = 8
+        dateComponents.minute = 0
 
-        // Create a trigger that fires every day at 9 AM
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
-        // Create a requestj
-        let request = UNNotificationRequest(identifier: "dailyReminder", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error.localizedDescription)")
+            } else {
+                print("Notification scheduled successfully!")
+            }
+        }
     }
 }
+

@@ -258,7 +258,6 @@ struct ContactInfoView: View {
             
             // Phone #
             Text("Email: \(contact.email ?? "No email")")
-            
             // Current Relationship Dropdown
             HStack() {
                 Text("Current Relationship:")

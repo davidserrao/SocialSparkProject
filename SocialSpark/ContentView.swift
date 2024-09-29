@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isAuthenticated = true
+    @State private var isAuthenticated = false
     @State private var accessToken: String? = nil
     private let authManager = AuthManager()
 
