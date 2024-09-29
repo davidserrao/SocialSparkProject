@@ -45,16 +45,16 @@ struct SparksPage: View {
                 .listStyle(PlainListStyle()) // Optional: List style adjustment
             }
             .navigationTitle("Sparks")
-                        .navigationBarItems(trailing: Button(action: {
-                            Task {
-                                await viewModel.fetchTasks()
-                            }
-                        }) {
-                            Text("Regenerate Sparks").foregroundColor(Color.blue)
-                        })
-                        .task {
-                            await viewModel.fetchTasks()
-                        }}
+            .navigationBarItems(trailing: Button(action: {
+                Task {
+                    await viewModel.fetchTasks()
+                }
+            }) {
+                Text("Regenerate Sparks").foregroundColor(Color.blue)
+            })
+            .task {
+                await viewModel.fetchTasks()
+            }}
     }
 }
 

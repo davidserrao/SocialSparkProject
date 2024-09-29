@@ -25,7 +25,7 @@ class SparksViewModel: ObservableObject {
     @Published var tasks: [SparkTask] = []
     
     func fetchTopN() async throws -> [Int] {
-        guard let url = URL(string: "http://127.0.0.1:8000/api/get/get-top-n/1/5") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/api/get/get-top-n/1/7") else {
             throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
         }
 

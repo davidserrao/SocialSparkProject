@@ -95,7 +95,7 @@ struct ConnectionsPage: View {
                 List(viewModel.contacts) { contact in
                     Button(action: {
                         selectedContact = contact
-                        isShowingContactInfo = true
+                        isShowingAddContact = true
                     }) {
                         HStack {
                             Text(contact.fname)
@@ -109,18 +109,20 @@ struct ConnectionsPage: View {
                 }
                 .listStyle(PlainListStyle())
             }
-            .navigationTitle("Connections")
             .navigationBarItems(leading: Button(action: {
                 openContactPicker()
             }) {
                 Text("Import Contacts")
                     .font(.title2)
+                    .foregroundColor(Color.yellow)
             }, trailing: Button(action: {
                 selectedContact = nil
                 isShowingAddContact = true
             }) {
                 Image(systemName: "plus")
                     .font(.title2)
+                    .foregroundColor(Color.yellow)
+
             })
 //            .sheet(item: $selectedContact) { contact in
 //                // Pass the selected contact to the sheet
